@@ -1,0 +1,12 @@
+1. create the class with native calls 
+2. compile the class
+javac <ClassName>.java
+3. under src create header
+-jni Generate JNI-style header file (default)
+-stubs To use C++ 
+javah package.name.<ClassName>
+4. write c code
+5. gcc -o lib<ClassName><win32/linux/...>.so -lc -shared -I/<JDK_PATH>/include -I/<ClassName>/include/<win32/linux/...> <name of generated jni file>.c
+Example: gcc -o libNativeCalls.so -lc -shared -I/mnt/c/Program\ Files/Java/jdk1.8.0_301/include -I/mnt/c/Program\ Files/Java/jdk1.8.0_301/include/win32 com_example_java_groovy_nativec_NativeCalls.c
+Example: gcc -o libNativeCalls.so -lc -shared -I/usr/lib/jvm/java-8-openjdk-amd64/include/ -I/usr/lib/jvm/java-8-openjdk-amd64/include/linux com_example_java_groovy_nativec_NativeCalls.c
+

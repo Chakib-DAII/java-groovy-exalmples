@@ -102,4 +102,56 @@ public interface RecursionUtils {
       data[i] = temp[i - start];
 
   }
+
+  static NodeLL reverseLinkedList(NodeLL head){
+    if(head == null || head.getNext() == null) return head;
+    NodeLL p = reverseLinkedList(head.getNext());
+    head.getNext().setNext(head);
+    head.setNext(null);
+    return p;
+  }
+
+  static NodeLL sortedMergeLinkedLists(NodeLL headA, NodeLL headB){
+    //Base Case / stop condition
+    if(headA == null) return headB;
+    if(headB == null) return headA;
+    //Recursive call
+    if(headA.getVal() <= headB.getVal()){
+      headA.setNext(sortedMergeLinkedLists(headA.getNext(), headB));
+      return headA;
+    }else{
+      headB.setNext(sortedMergeLinkedLists(headA, headB.getNext()));
+      return headB;
+    }
+  }
+
+  static NodeTree insertNodeInTree(NodeTree root, int data){
+    //Base Case / stop condition
+    if(root == null){
+      root = new NodeTree(data);
+      return root;
+    }
+    //Recursive call
+    if(root.getVal() <= data){
+      root.setRight(insertNodeInTree(root.getRight(), data));
+    }else{
+      root.setRight(insertNodeInTree(root.getLeft(), data));
+    }
+    return root;
+  }
+
+  static void printLeaves(NodeTree root){
+    //Base Case / stop condition
+    if (root == null) return;
+    if(root.getLeft() == null && root.getRight() == null){
+      System.out.print(root.getVal() + ", ");
+      return;
+    }
+    //Recursive call
+    if (root.getLeft() != null)
+      printLeaves(root.getLeft());
+    if (root.getRight() != null)
+      printLeaves(root.getRight());
+  }
+
 }

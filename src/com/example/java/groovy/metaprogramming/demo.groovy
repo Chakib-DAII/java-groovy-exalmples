@@ -9,5 +9,3 @@ c.delegate = sb
 c()
 
 println "SB: ${sb}"
-    
-    
